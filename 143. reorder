@@ -1,0 +1,48 @@
+void reorderList(ListNode* head) {
+    ListNode* fast=head;
+    ListNode* slow=head;
+    
+    while(fast->next&&fast->next->next)
+    {
+        fast=fast->next->next;
+        slow=slow->next;
+    }
+    ListNode* mid=slow;
+    
+    ListNode* temp=revnode(mid->next);
+    slow->next=NULL;
+   
+     
+    ListNode* dummy=new ListNode(0);
+    ListNode* helper=dummy;
+    while(head||temp)
+    {
+		if(head)
+			{ helper->next=head;
+			  head=head->next;
+			}
+		  helper=helper->next;
+			if(temp)
+			 {
+			 helper->next=temp;
+			 temp=temp->next;
+			 }
+        helper=helper->next;
+     
+        
+      }
+		  head=dummy->next;
+}
+
+
+    ListNode* revnode(ListNode* head)
+    {
+        if(head==NULL||head->next==NULL)
+        return head;
+        ListNode* nhead=revnode(head->next);
+        head->next->next=head;
+        head->next=NULL;
+        
+        return nhead;
+    }
+'''
